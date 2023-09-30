@@ -23,13 +23,15 @@ const Home: any = async ({
   const limit: number = +searchParams.limit! || 10;
 
   const response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${page}`
+    `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${page}`,
+    { cache: 'no-cache' }
   );
+
   const data: Data = await response.json();
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<Loading />} key={page}>
         {data.results.map((pokemon: Pokemon) => {
           return (
             <div

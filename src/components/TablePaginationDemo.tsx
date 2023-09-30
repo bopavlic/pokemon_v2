@@ -69,24 +69,14 @@ const TablePaginationDemo: React.FC<Props> = (props: Props) => {
   }, [createQueryString, limit, pathname, router, searchParams]);
 
   return (
-    <>
-      <TablePagination
-        component='div'
-        count={data.count}
-        page={page}
-        onPageChange={handleChangePage}
-        rowsPerPage={limit}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-      {/* <button
-        onClick={() => {
-          // <pathname>?sort=asc
-          router.push(pathname + '?' + createQueryString('sort', 'asc'));
-        }}
-      >
-        ASC
-      </button> */}
-    </>
+    <TablePagination
+      component='div'
+      count={data.count}
+      page={page}
+      onPageChange={handleChangePage}
+      rowsPerPage={limit}
+      onRowsPerPageChange={handleChangeRowsPerPage}
+    />
   );
 };
 
