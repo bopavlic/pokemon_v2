@@ -21,7 +21,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 # Vercel link
-Live link: [https://my-app-bopavlic.vercel.app/](https://my-app-bopavlic.vercel.app/).
+Live link: [https://pokemon-v2.vercel.app/](https://pokemon-v2.vercel.app/).
 
 ## Learn More
 
