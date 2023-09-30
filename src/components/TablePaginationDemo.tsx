@@ -3,24 +3,13 @@ import React from 'react';
 import { useCallback, useEffect } from 'react';
 import TablePagination from '@mui/material/TablePagination';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
+import { Data } from '@/types';
 
-interface Data {
-  count: number;
-  next: string;
-  previous: string;
-  results: Array<Pokemon>;
-}
-
-interface Pokemon {
-  name: string;
-  url: string;
-}
-
-interface Props {
+interface TablePaginationDemoProps {
   data: Data;
 }
 
-const TablePaginationDemo: React.FC<Props> = (props: Props) => {
+const TablePaginationDemo: React.FC<TablePaginationDemoProps> = (props) => {
   const { data } = props;
   const searchParams = useSearchParams();
   const router = useRouter();

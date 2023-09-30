@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Pokemon v2',
-  description: 'A simple pokemon playground with Next.js and Tailwind CSS',
+  description: 'A simple pokemon playground with Next 13 and Tailwind CSS',
 };
 
 export default function RootLayout({

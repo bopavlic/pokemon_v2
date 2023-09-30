@@ -1,47 +1,31 @@
-import TablePaginationDemo from '@/components/TablePaginationDemo';
-import Loading from './loading';
 import { Suspense } from 'react';
+import PokemonList from '@/components/PokemonList';
+import TablePaginationDemo from '@/components/TablePaginationDemo';
+import SkeletonList from '@/components/SkeletonList';
+import { Data } from '@/types';
 
-const Home: any = async ({
-  searchParams,
-}: {
+interface HomeProps {
   searchParams: { [key: string]: string | string[] | undefined };
-}) => {
-  interface Data {
-    count: number;
-    next: string;
-    previous: string;
-    results: Array<Pokemon>;
-  }
+}
 
-  interface Pokemon {
-    name: string;
-    url: string;
-  }
-
+const Home: React.FC<HomeProps> = async (props) => {
+  const { searchParams } = props;
   const page: number = +searchParams.page! || 0;
   const limit: number = +searchParams.limit! || 10;
 
   const response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${page}`,
-    { cache: 'no-cache' }
+    `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${page}`
   );
 
   const data: Data = await response.json();
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-      <Suspense fallback={<Loading />} key={page}>
-        {data.results.map((pokemon: Pokemon) => {
-          return (
-            <div
-              key={pokemon.name}
-              className='flex flex-col items-center justify-center'
-            >
-              <p>{pokemon.name}</p>
-            </div>
-          );
-        })}
+    <main className='flex min-h-screen flex-col items-center justify-center gap-16'>
+      <Suspense
+        fallback={<SkeletonList listLength={limit} />}
+        key={page + limit}
+      >
+        <PokemonList data={data} />
       </Suspense>
       <TablePaginationDemo data={data} />
     </main>
