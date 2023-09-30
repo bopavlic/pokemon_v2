@@ -1,6 +1,6 @@
 import React from 'react';
 import TablePaginationDemo from '@/components/TablePaginationDemo';
-import Loading from './loading';
+
 import { Suspense } from 'react';
 import Pokemon from '@/components/Pokemon';
 import { fetchPokemons } from '@/services/fetchPokemons';
@@ -25,11 +25,12 @@ const Home: any = async ({
   const page: number = +searchParams.page! || 0;
   const limit: number = +searchParams.limit! || 10;
 
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   const data = await fetchPokemons(page, limit);
 
   return (
-    <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-      <Suspense fallback={<Loading />}>
+    <Suspense fallback={<p>Loading...</p>} key={String(page)}>
+      <main className='flex min-h-screen flex-col items-center justify-between p-24'>
         {data?.results &&
           data.results.map((pokemon: ApiPokemon) => {
             return (
@@ -38,13 +39,13 @@ const Home: any = async ({
               </React.Fragment>
             );
           })}
-      </Suspense>
-      <TablePaginationDemo
-        data={
-          data || ({ count: 0, next: '', previous: '', results: [] } as Data)
-        }
-      />
-    </main>
+        <TablePaginationDemo
+          data={
+            data || ({ count: 0, next: '', previous: '', results: [] } as Data)
+          }
+        />
+      </main>
+    </Suspense>
   );
 };
 

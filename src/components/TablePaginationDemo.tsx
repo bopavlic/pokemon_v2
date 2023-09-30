@@ -63,7 +63,7 @@ const TablePaginationDemo: React.FC<Props> = (props: Props) => {
           '?' +
           createQueryString('page', '0') +
           '&' +
-          createQueryString('limit', limit.toString())
+          createQueryString('limit', String(limit))
       );
     }
   }, [createQueryString, limit, pathname, router, searchParams]);
